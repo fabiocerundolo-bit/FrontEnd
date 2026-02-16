@@ -1,88 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lezione 1</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <!-- Heading - tag per titoli (h1 -> h6) -->
-    <!-- h1 è il più importante -->
     <h1 style="font-size: 300%;">Questa è la lezione 1</h1>
 
+    <!-- Sezione Libri -->
+    <section id="libri" title="i miei libri">
+        <h2 style="color: rgb(0, 0, 0);">I miei libri preferiti</h2>
+        
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: brown; color: white; float: left; margin: 10px; box-sizing: border-box;">
+            <h2 title="Il Barone rampante Italo Calvino">Il Barone Rampante di Italo Calvino</h2>
+            <img src="./img/copertina_libro_il_barone_rampante.jpg"
+                alt="Copertina del libro Il Barone Rampante di Italo Calvino"
+                title="Il Barone Rampante di Italo Calvino" 
+                style="width: 60%; height: auto;">
+            <h3 title="Trama del Barone Rampante Italo Calvino">Trama</h3>
+            <p title="Il Barone rampante Italo Calvino">
+                Il Barone Rampante è un romanzo di Italo Calvino pubblicato nel 1957. Racconta la storia di Cosimo
+                Piovasco di Rondò, un giovane nobile che decide di vivere sugli alberi per sfuggire alle convenzioni 
+                sociali e alla rigidità della sua famiglia. Il romanzo esplora temi come la libertà, l'individualismo 
+                e la critica alla società del tempo, offrendo una narrazione ricca di fantasia e simbolismo.
+            </p>
+        </div>
 
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: rgb(75, 75, 145); color: white; float: left; margin: 10px; box-sizing: border-box;">
+            <h2 title="Il Visconte dimezzato Italo Calvino">Il Visconte dimezzato</h2>
+            <img src="./img/copertina_libro_il_visconte_dimmezato.JPG" 
+                alt="Copertina del libro Il Visconte dimezzato"
+                title="Il Visconte dimezzato di Italo Calvino" 
+                style="width: 60%; height: auto;">
+            <h3 title="Trama del Visconte dimezzato Italo Calvino">Trama</h3>
+            <p title="Il Visconte dimezzato Italo Calvino">
+                Il Visconte dimezzato è un romanzo di Italo Calvino pubblicato nel 1952. Racconta la storia di Medardo
+                di Terralba, un visconte che viene colpito da una palla di cannone durante una battaglia e si ritrova
+                diviso in due metà: una metà buona e l'altra metà cattiva. Il romanzo esplora temi come la dualità 
+                dell'animo umano e la lotta tra il bene e il male.
+            </p>
+        </div>
 
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: yellowgreen; float: left; margin: 10px; box-sizing: border-box;">
+            <h2 title="Il Cavaliere inesistente Italo Calvino">Il Cavaliere inesistente</h2>
+            <img src="./img/copertina_libro_il_cavaliere_inesistente.jpg"
+                alt="Copertina del libro Il Cavaliere inesistente" 
+                title="Il Cavaliere inesistente di Italo Calvino" 
+                style="width: 60%; height: auto;">
+            <h3 title="Trama del Cavaliere inesistente Italo Calvino">Trama</h3>
+            <p title="Il Cavaliere inesistente">
+                Il Cavaliere inesistente è un romanzo di Italo Calvino pubblicato nel 1959. Racconta la storia di
+                Agilulfo, un cavaliere che esiste solo come armatura vuota, senza un corpo o un'anima. Il romanzo 
+                esplora temi come l'identità, la realtà e l'assurdità della condizione umana, offrendo una narrazione 
+                ricca di ironia e riflessione filosofica.
+            </p>
+        </div>
+    </section>
 
-    <div
-        style="width: 400px; border: 1px solid black; padding: 10px; background-color: brown; padding: 20px; float: left;">
-        <!-- Il tag div è un contenitore generico che non ha significato semantico, ma viene utilizzato per raggruppare elementi e applicare stili o layout -->
-        <h2 title="Il Barore rampante Italo Calvino">
-            Il Barone Rampante di Italo Calvino</h2>
-        <!--Immagine copertina libro-->
-        <img src="./img/copertina_libro_il_barone_rampante.jpg"
-            alt="Copertina del libro Il Barone Rampante di Italo Calvino" title="Il Barone Rampante di Italo Calvino"
-            style="width: 60%; height: auto;">
-        <h2 title="Trama del Barone Rampante Italo Calvino">
-            Trama</h2>
-        <p title="Il Barore rampante Italo Calvino">
-            Il baroner rampante è un romanzo di Italo Calvino pubblicato nel 1957. Racconta la storia di Cosimo Piovasco
-            di
-            Rondò, un giovane nobile che decide di vivere sugli alberi per sfuggire alle convenzioni sociali e alla
-            rigidità
-            della sua famiglia. Il romanzo esplora temi come la libertà, l'individualismo e la critica alla società del
-            tempo, offrendo una narrazione ricca di fantasia e simbolismo.
-        </p>
+    <!-- Sezione Album Musicali -->
+    <section id="album" title="I miei album musicali" style="clear: both;">
+        <h2 style="color: rgb(0, 0, 0);">I miei album musicali preferiti</h2>
+        
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: rgb(75, 75, 145); color: white; float: left; margin: 10px; box-sizing: border-box; border-radius: 10px;">
+            <h2 title="Album The Dark Side of the Moon dei Pink Floyd">The Dark Side of the Moon - Pink Floyd</h2>
+            <img src="./img/copertina_album_the_dark_side_of_the_moon.jpg"
+                alt="Copertina dell'album The Dark Side of the Moon dei Pink Floyd"
+                title="The Dark Side of the Moon - Pink Floyd" 
+                style="width: 60%; height: auto;">
+            <h3 title="Descrizione dell'album The Dark Side of the Moon dei Pink Floyd">Descrizione</h3>
+            <p title="The Dark Side of the Moon - Pink Floyd">
+                The Dark Side of the Moon è un album dei Pink Floyd pubblicato nel 1973. È considerato uno dei più
+                grandi album di tutti i tempi e ha avuto un enorme successo commerciale. L'album esplora temi come la
+                follia, la morte, il tempo e la condizione umana, offrendo una narrazione musicale ricca di atmosfere 
+                e sperimentazione sonora.
+            </p>
+        </div>
 
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: yellowgreen; float: left; margin: 10px; box-sizing: border-box; border-radius: 10px;">
+            <h2 title="Album Abbey Road dei Beatles">Abbey Road - The Beatles</h2>
+            <img src="./img/copertina_album_abbey_road.jpg" 
+                alt="Copertina dell'album Abbey Road dei Beatles"
+                title="Abbey Road - The Beatles" 
+                style="width: 60%; height: auto;">
+            <h3 title="Descrizione dell'album Abbey Road dei Beatles">Descrizione</h3>
+            <p title="Abbey Road - The Beatles">
+                Abbey Road è un album dei Beatles pubblicato nel 1969. È uno degli album più iconici della band e ha
+                avuto un enorme successo commerciale. L'album esplora una varietà di stili musicali, dal rock al pop
+                al blues, offrendo una narrazione musicale ricca di melodie memorabili e arrangiamenti innovativi.
+            </p>
+        </div>
 
-
-    </div>
-    <div
-        style="width: 400px; border: 1px solid black; padding: 10px; background-color: rgb(75, 75, 145); padding: 20px; float: left;">
-        <!-- Il tag div è un contenitore generico che non ha significato semantico, ma viene utilizzato per raggruppare elementi e applicare stili o layout -->
-        <h2 title="Il Visconte dimmezato Italo Calvino">
-            Il Visconte dimezzato</h2>
-        <!--Immagine copertina libro-->
-        <img src="./img/copertina_libro_il_visconte_dimmezato.JPG" alt="Copertina del libro Il Visconte dimmezato"
-            title="Il Barone Rampante di Italo Calvino" style="width: 60%; height: auto;">
-        <h2 title="Trama del Visconte dimmezato Italo Calvino">
-            Trama</h2>
-        <p title="Il Barore rampante Italo Calvino">
-            Il Visconte dimezzato è un romanzo di Italo Calvino pubblicato nel 1952. Racconta la storia di Medardo di
-            Terralba, un visconte che viene colpito da una palla di cannone durante una battaglia e si ritrova diviso in
-            due metà: una metà buona e l'altra metà cattiva. Il romanzo esplora temi come la dualità dell'animo umano,
-            la lotta tra il bene
-        </p>
-
-
-
-    </div>
-    <div
-        style="width: 400px; border: 1px solid black; padding: 10px; background-color: yellowgreen; padding: 20px; float: left;">
-        <!-- Il tag div è un contenitore generico che non ha significato semantico, ma viene utilizzato per raggruppare elementi e applicare stili o layout -->
-        <h2 title="Il Cavaliere inesistente Italo Calvino">
-            Il Cavaliere inesistente</h2>
-        <!--Immagine copertina libro-->
-        <img src="./img/copertina_libro_il_cavaliere_inesistente.jpg" alt="Copertina del libro il Cavaliere inesistente"
-            title="Il Barone Rampante di Italo Calvino" style="width: 60%; height: auto;">
-        <h2 title="Trama del Cavaliere inesistente Italo Calvino">
-            Trama</h2>
-        <p title="Il Cavaliere inesistente">
-            Il Cavaliere inesistente è un romanzo di Italo Calvino pubblicato nel 1959. Racconta la storia di Agilulfo,
-            un
-            cavaliere che esiste solo come armatura vuota, senza un corpo o un'anima. Il romanzo esplora temi come
-            l'identità, la realtà e l'assurdità della condizione umana, offrendo una narrazione ricca di ironia e
-            riflessione filosofica.
-        </p>
-
-
-
-    </div>
-    
-
-
+        <div style="width: 400px; border: 1px solid black; padding: 20px; background-color: burlywood; float: left; margin: 10px; box-sizing: border-box; border-radius: 10px;">
+            <h2 title="Album Thriller di Michael Jackson">Thriller - Michael Jackson</h2>
+            <img src="./img/copertina_album_thriller.jpg" 
+                alt="Copertina dell'album Thriller di Michael Jackson"
+                title="Thriller - Michael Jackson" 
+                style="width: 60%; height: auto;">
+            <h3 title="Descrizione dell'album Thriller di Michael Jackson">Descrizione</h3>
+            <p title="Thriller - Michael Jackson">
+                Thriller è un album di Michael Jackson pubblicato nel 1982. È l'album più venduto di tutti i tempi e ha
+                avuto un enorme successo commerciale. L'album esplora una varietà di stili musicali, dal pop al rock
+                al funk, offrendo una narrazione musicale ricca di hit memorabili e arrangiamenti innovativi.
+            </p>
+        </div>
+    </section>
 
 </body>
 
