@@ -1,15 +1,18 @@
 /* ===== RESET E VARIABILI ===== */
 :root {
-    /* Colori principali */
-    --primary-color: #ff6b6b;
-    --secondary-color: #4ecdc4;
-    --accent-color: #ff9f1c;
-    --text-color: #333;
-    --text-light: #666;
-    --background-light: #f9f9f9;
-    --white: #ffffff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.2);
+    /* Colori principali - Tema scuro */
+    --primary-color: #ff7b7b; /* Rosso più brillante per contrasto */
+    --secondary-color: #6c5ce7; /* Viola invece del turchese */
+    --accent-color: #fdc830; /* Giallo dorato */
+    --text-color: #e0e0e0; /* Testo chiaro */
+    --text-light: #a0a0a0; /* Testo secondario più chiaro */
+    --background-dark: #1a1a1a; /* Sfondo principale scuro */
+    --background-card: #2d2d2d; /* Sfondo card */
+    --background-light: #2d2d2d; /* Rinominato per compatibilità */
+    --white: #2d2d2d; /* Rinominato per compatibilità */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.4);
+    --border-color: #404040;
     
     /* Spaziature */
     --spacing-xs: 0.5rem;
@@ -34,7 +37,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--background-light);
+    background-color: var(--background-dark);
 }
 
 /* ===== LAYOUT ===== */
@@ -49,7 +52,7 @@ body {
 }
 
 .section:nth-child(even) {
-    background-color: var(--white);
+    background-color: #222222; /* Leggermente più chiaro per alternanza */
 }
 
 .section-title {
@@ -76,24 +79,26 @@ body {
 /* ===== ALBUM CARDS ===== */
 .album-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne fisse */
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-lg);
     padding: var(--spacing-md) 0;
 }
 
 .album-card {
-    background: var(--white);
+    background: var(--background-card);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--border-color);
 }
 
 .album-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
+    border-color: var(--secondary-color);
 }
 
 .album-image {
@@ -143,17 +148,17 @@ body {
 /* ===== TESTI CARDS ===== */
 .testi-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonne fisse */
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-lg);
 }
 
 .testo-card {
-    background: var(--white);
+    background: var(--background-card);
     border-radius: var(--border-radius);
     padding: var(--spacing-lg);
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border: 1px solid var(--border-color);
     height: 100%;
     display: flex;
     align-items: center;
@@ -162,6 +167,7 @@ body {
 .testo-card:hover {
     border-color: var(--secondary-color);
     transform: translateY(-3px);
+    background-color: #333333;
 }
 
 .testo-content {
@@ -171,41 +177,49 @@ body {
     margin: 0;
 }
 
+.testo-content br {
+    margin-bottom: var(--spacing-xs);
+    content: "";
+    display: block;
+}
+
 .testo-link {
     display: inline-block;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     text-decoration: none;
     font-weight: 600;
-    margin: 0 var(--spacing-xs);
+    margin: var(--spacing-xs) 0 0 0;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--border-radius-sm);
     transition: all 0.3s ease;
+    background-color: rgba(108, 92, 231, 0.1);
 }
 
 .testo-link:hover {
     color: var(--white);
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     transform: translateX(5px);
 }
 
 /* ===== FOOTER ===== */
 .footer {
-    background-color: var(--text-color);
-    color: var(--white);
+    background-color: #111111;
+    color: var(--text-light);
     text-align: center;
     padding: var(--spacing-lg) 0;
     margin-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
 }
 
 /* ===== MEDIA QUERIES ===== */
 /* Tablet */
 @media (max-width: 992px) {
     .album-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonne su tablet */
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .testi-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonne su tablet */
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .section-title {
@@ -232,11 +246,11 @@ body {
 /* Mobile */
 @media (max-width: 576px) {
     .album-grid {
-        grid-template-columns: 1fr; /* 1 colonna su mobile */
+        grid-template-columns: 1fr;
     }
     
     .testi-grid {
-        grid-template-columns: 1fr; /* 1 colonna su mobile */
+        grid-template-columns: 1fr;
     }
     
     .section {
@@ -288,13 +302,15 @@ button:focus {
 }
 
 /* ===== CORREZIONI ANNI ===== */
-/* Nota: ho visto che tutti gli album hanno anno 1973 */
-/* Se vuoi anni diversi, modifica nell'HTML */
 .album-year {
     font-style: italic;
 }
 
 /* Effetto aggiuntivo per le card */
+.album-card {
+    position: relative;
+}
+
 .album-card::after {
     content: '';
     position: absolute;
@@ -303,11 +319,174 @@ button:focus {
     width: 100%;
     height: 100%;
     border-radius: var(--border-radius);
-    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.5);
+    box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.2);
     transition: box-shadow 0.3s ease;
     pointer-events: none;
 }
 
 .album-card:hover::after {
-    box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.3);
+    box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.3);
+}
+
+/* ===== SCROLLBAR PERSONALIZZATA ===== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+/* ===== COPERTINE SINGOLI ===== */
+.singoli-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md) 0;
+}
+
+.singolo-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.singolo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.singolo-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+.singolo-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.singolo-card:hover .singolo-image img {
+    transform: scale(1.1);
+}
+
+.singolo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.singolo-card:hover .singolo-overlay {
+    opacity: 1;
+}
+
+.play-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.play-icon:hover {
+    transform: scale(1);
+    background-color: var(--secondary-color);
+}
+
+.singolo-info {
+    padding: var(--spacing-md);
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.singolo-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.singolo-artist {
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+.singolo-album {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.singolo-year {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+/* Media Queries per i singoli */
+@media (max-width: 992px) {
+    .singoli-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .singoli-grid {
+        gap: var(--spacing-md);
+    }
+    
+    .play-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .singoli-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .singolo-info h3 {
+        font-size: 1.1rem;
+    }
 }
