@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-800;
+  }
+}
+
+@layer components {
+  .section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16 relative pb-4;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .album-card {
+    @apply bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+  
+  .album-image {
+    @apply w-full h-64 md:h-72 lg:h-80 overflow-hidden bg-gradient-to-br from-primary to-secondary;
+  }
+  
+  .album-image img {
+    @apply w-full h-full object-cover transition-transform duration-500 hover:scale-110;
+  }
+  
+  .album-info {
+    @apply p-4 md:p-6 text-center;
+  }
+  
+  .singolo-card {
+    @apply bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+  
+  .singolo-image {
+    @apply relative w-full aspect-square overflow-hidden bg-gradient-to-br from-secondary to-primary;
+  }
+  
+  .singolo-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+  
+  .singolo-card:hover .singolo-image img {
+    @apply scale-110;
+  }
+  
+  .singolo-overlay {
+    @apply absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 transition-opacity duration-300;
+  }
+  
+  .singolo-card:hover .singolo-overlay {
+    @apply opacity-100;
+  }
+  
+  .play-icon {
+    @apply w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-primary rounded-full flex items-center justify-center text-white text-xl md:text-2xl transform scale-90 transition-all duration-300 cursor-pointer shadow-lg hover:scale-100 hover:bg-secondary;
+  }
+  
+  .testo-card {
+    @apply bg-white rounded-xl p-6 md:p-8 shadow-lg transition-all duration-300 border border-transparent hover:border-secondary hover:-translate-y-1;
+  }
+  
+  .testo-content {
+    @apply text-gray-700 text-base md:text-lg leading-relaxed;
+  }
+  
+  .testo-link {
+    @apply inline-block text-primary font-semibold px-2 py-1 rounded transition-all duration-300 hover:bg-primary hover:text-white hover:translate-x-1;
+  }
+}
