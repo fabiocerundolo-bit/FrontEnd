@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <title>To Do List</title>
+</head>
+
+<body>
+    <h1>To Do List</h1>
+
+    <input type="text" id="itemInput" placeholder="Inserisci item">
+    <input type="date" id="dataInput">
+    <input type="time" id="oraInput">
+    <button onclick="addItem()">Aggiungi</button>
+    <button onclick="saveTodos()">Salva</button>
+
+    <ul id="todoList"></ul>
+
+
+</body>
+<script src="./js/script.js"></script>
+</html>
