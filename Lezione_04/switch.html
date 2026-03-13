@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco: Switch Quest - La Torre dei Livelli</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="achievement" id="achievement">🏆 Obiettivo Sbloccato!</div>
+
+<div class="game-container">
+    <h1>🏰 La Torre dei Livelli 🏰</h1>
+
+    <div class="tower" id="tower">
+        <!-- I piani verranno generati qui -->
+    </div>
+
+    <div class="game-info">
+        <div>Piano Attuale</div>
+        <div class="level-display" id="currentLevelDisplay">1</div>
+    </div>
+
+    <div class="message-box" id="messageBox">
+        🎮 Benvenuto nella Torre! Clicca su un piano o usa i bottoni per salire!
+    </div>
+
+    <div class="button-container">
+        <button class="btn-primary" onclick="saliPiano()">
+            ⬆️ Sali al Prossimo Piano
+        </button>
+        <button class="btn-reset" onclick="resettaGioco()">
+            🔄 Ricomincia dall'Inizio
+        </button>
+        <button class="btn-hint" onclick="mostraIndizio()">
+            💡 Indizio
+        </button>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <div>Piani Esplorati</div>
+            <div class="stat-value" id="pianiEsplorati">1</div>
+        </div>
+        <div class="stat-item">
+            <div>Obiettivi Trovati</div>
+            <div class="stat-value" id="obiettiviTrovati">0</div>
+        </div>
+        <div class="stat-item">
+            <div>Piano Segreto</div>
+            <div class="stat-value" id="pianoSegreto">???</div>
+        </div>
+    </div>
+
+    <div class="hint-text" id="hintText">
+        💭 Prova a cliccare sui piani della torre...
+    </div>
+</div>
+
+<script src="./js/script1.js"></script>
+</body>
+</html>
