@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gioco del Lotto</title>
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
+  <div class="container">
 
+    <header>
+      <h1>Gioco del Lotto</h1>
+      <p>Estrazione casuale senza ripetizione — da 1 a 90</p>
+    </header>
+
+    <section class="controls">
+      <div class="slider-row">
+        <label for="count-slider">Numeri da estrarre</label>
+        <input type="range" id="count-slider" min="1" max="90" value="5" step="1" />
+        <span class="slider-val" id="slider-val">5</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="draw()">Estrai</button>
+        <button class="btn-secondary" onclick="reset()">Ricomincia</button>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <div class="results-label">Numeri estratti</div>
+      <div class="results-balls" id="results-balls">
+        <span class="placeholder-text">I numeri estratti appariranno qui…</span>
+      </div>
+    </section>
+
+    <section class="grid-section">
+      <div class="grid-label">Tutti i numeri (1–90)</div>
+      <div class="numbers-grid" id="numbers-grid"></div>
+    </section>
+
+  </div>
+
+  <script src="./js/script.js"></script>
 </body>
 </html>
