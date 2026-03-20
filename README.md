@@ -33,3 +33,9 @@ Progetto didattico con esercizi di JavaScript, HTML e CSS suddivisi per lezioni.
 - Aggiungere un file `favicon.ico` in root per evitare 404 nei browser.
 - Aggiungere commenti e istruzioni per altri esercizi.
 - Convertire tutti i file in UTF-8 se non già.
+
+## Cronologia modifiche
+
+- 2026-03-20: Aggiornato `README.md` con struttura, istruzioni run e note specifiche.
+- 2026-03-20: Aggiunti commenti dettagliati in `Lezione_7/js/callback.js` (funzioni, callback, timer, eventi, error handling, forEach).
+
