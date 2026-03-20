@@ -49,35 +49,44 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Bottone #btn non trovato in callback.html');
     }
 });
+// Funzione che esegue un'operazione matematica generica passata come callback
 function esegueOperazione(a, b, operazione) {
+    // Chiamiamo la callback 'operazione' con gli argomenti 'a' e 'b'
     return operazione(a, b);
 }
 
-console.log(esegueOperazione(5, 10, (a, b) => a + b)); // Esegue l'operazione di somma
-console.log(esegueOperazione(5, 10, (a, b) => a * b)); // Esegue l'operazione di moltiplicazione
-console.log(esegueOperazione(5, 10, (a, b) => a - b)); // Esegue l'operazione di sottrazione
-console.log(esegueOperazione(5, 10, (a, b) => a / b)); // Esegue l'operazione di divisione
+// Esempi con operazioni anonime (callback arrow function)
+console.log(esegueOperazione(5, 10, (a, b) => a + b)); // Somma
+console.log(esegueOperazione(5, 10, (a, b) => a * b)); // Moltiplicazione
+console.log(esegueOperazione(5, 10, (a, b) => a - b)); // Sottrazione
+console.log(esegueOperazione(5, 10, (a, b) => a / b)); // Divisione
 
+// Funzione che esegue un'operazione e fornisce il risultato ad una callback
 function esegueOperazioneConCallback(a, b, operazione, callback) {
     const risultato = operazione(a, b);
     callback(risultato);
 }
 
+// Uso della funzione con callback per ricevere il risultato
 esegueOperazioneConCallback(5, 10, (a, b) => a + b, (risultato) => {
     console.log(`Il risultato della somma è: ${risultato}`);
 });
 
-//Utilizzo di callback per gestire errori
+// Utilizzo di callback per gestire errori con try/catch
 function esegueOperazioneConErrore(a, b, operazione, callback) {
     try {
         const risultato = operazione(a, b);
-        callback(null, risultato);
+        callback(null, risultato); // nessun errore, fornisci risultato
     } catch (error) {
-        callback(error, null);
+        callback(error, null); // errore, fornisci il messaggio di errore
     }
 }
 
-esegueOperazioneConErrore(5, 0, (a, b) => a / b, (error, risultato) => {
+// Esempio con divisione: la divisione per zero genera un errore
+esegueOperazioneConErrore(5, 0, (a, b) => {
+    if (b === 0) throw new Error('Divisione per zero');
+    return a / b;
+}, (error, risultato) => {
     if (error) {
         console.error('Si è verificato un errore:', error.message);
     } else {
@@ -85,6 +94,44 @@ esegueOperazioneConErrore(5, 0, (a, b) => a / b, (error, risultato) => {
     }
 });
 
+// setTimeout con callback per operazioni asincrone temporali
 setTimeout(() => {
     console.log('Questo messaggio viene visualizzato dopo 3 secondi');
 }, 3000);
+
+// setInterval + clearInterval per eseguire codice ripetuto e poi fermarsi
+let counter = 0;
+const intervalId = setInterval(() => {
+    counter++;
+    console.log(`Counter: ${counter}`);
+    if (counter >= 5) {
+        clearInterval(intervalId);
+        console.log('Intervallo cancellato dopo 5 incrementi');
+    }
+}, 1000);
+
+// Array e forEach: callback per ogni elemento
+let nomi1 = ['Anna', 'Marco', 'Luca'];
+nomi1.forEach((nome, index) => {
+    // imprime messaggio per ogni nome presente nell'array
+    console.log(`Ciao ${nome}, sei il numero ${index + 1} nella lista`);
+});
+
+
+let nomi = ['Anna', 'Marco', 'Luca'];
+let cognomi = ['Rossi', 'Bianchi', 'Verdi'];
+// Utilizzo di map con callback per creare un nuovo array di nomi completi
+let nomiCompleti = nomi.map((nome, index) => `${nome} ${cognomi[index]}`);
+console.log(nomiCompleti);
+
+nomi.filter((nome) => nome.startsWith('A')).forEach((nome) => {
+    console.log(`Ciao ${nome}, il tuo nome inizia con A!`);
+});
+
+
+let ricerca= nomi.find((nome) => nome === 'Marco');
+if (ricerca) {
+    console.log(`Trovato: ${ricerca}`);
+} else {
+    console.log('Non trovato');
+}
