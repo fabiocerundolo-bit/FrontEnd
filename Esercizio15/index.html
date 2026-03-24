@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 15 - Presentazione Utente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .info-card {
+            margin-top: 25px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            display: none;
+        }
+        .info-card.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .info-card h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .info-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+        }
+        .info-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            font-size: 18px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Registrazione Utente</h1>
+        
+        <form id="userForm">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Inserisci il tuo nome">
+            </div>
+            
+            <div class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" placeholder="Inserisci il tuo cognome">
+            </div>
+            
+            <div class="form-group">
+                <label for="dataNascita">Data di Nascita:</label>
+                <input type="date" id="dataNascita">
+            </div>
+            
+            <div class="form-group">
+                <label for="eta">Età:</label>
+                <input type="number" id="eta" placeholder="Inserisci la tua età">
+            </div>
+            
+            <div class="form-group">
+                <label for="corso">Corso Frequentato:</label>
+                <input type="text" id="corso" placeholder="Es: Programmazione Web">
+            </div>
+            
+            <button type="button" onclick="mostraInfo()">Mostra Info 📋</button>
+        </form>
+        
+        <div class="info-card" id="infoCard">
+            <h2>👤 Profilo Utente</h2>
+            <div id="infoContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        function mostraInfo() {
+            // Recupera i valori dai campi input
+            const nome = document.getElementById('nome').value;
+            const cognome = document.getElementById('cognome').value;
+            const dataNascita = document.getElementById('dataNascita').value;
+            const eta = document.getElementById('eta').value;
+            const corso = document.getElementById('corso').value;
+            
+            // Verifica che tutti i campi siano compilati
+            if (!nome || !cognome || !dataNascita || !eta || !corso) {
+                alert('Per favore compila tutti i campi');
+                return;
+            }
+            
+            // Chiama la funzione per mostrare le info
+            mostraInfoUtente(nome, cognome, dataNascita, eta, corso);
+        }
+        
+        /**
+         * Mostra le informazioni dell'utente
+         * @param {string} nome - Nome dell'utente
+         * @param {string} cognome - Cognome dell'utente
+         * @param {string} dataNascita - Data di nascita
+         * @param {number} eta - Età
+         * @param {string} corso - Corso frequentato
+         */
+        function mostraInfoUtente(nome, cognome, dataNascita, eta, corso) {
+            const infoContent = document.getElementById('infoContent');
+            const infoCard = document.getElementById('infoCard');
+            
+            infoContent.innerHTML = `
+                <div class="info-item">
+                    <div class="info-label">Nome</div>
+                    <div class="info-value">${nome}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Cognome</div>
+                    <div class="info-value">${cognome}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Data di Nascita</div>
+                    <div class="info-value">${formattaData(dataNascita)}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Età</div>
+                    <div class="info-value">${eta} anni</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Corso Frequentato</div>
+                    <div class="info-value">${corso}</div>
+                </div>
+            `;
+            
+            infoCard.classList.add('show');
+        }
+        
+        function formattaData(dataString) {
+            const data = new Date(dataString);
+            return data.toLocaleDateString('it-IT');
+        }
+    </script>
+</body>
+</html>

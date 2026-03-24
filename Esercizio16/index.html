@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 16 - Area e Volume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .btn-perimetro {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .result-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        .result-label {
+            color: #666;
+            font-size: 16px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📐 Area e Volume</h1>
+        
+        <div class="form-group">
+            <label for="base">Base (cm):</label>
+            <input type="number" id="base" placeholder="Inserisci la base" value="10">
+        </div>
+        
+        <div class="form-group">
+            <label for="altezza">Altezza (cm):</label>
+            <input type="number" id="altezza" placeholder="Inserisci l'altezza" value="5">
+        </div>
+        
+        <div class="form-group">
+            <label for="profondita">Profondità (cm) - per volume:</label>
+            <input type="number" id="profondita" placeholder="Inserisci la profondità" value="8">
+        </div>
+        
+        <div class="buttons">
+            <button onclick="calcolaArea()">Calcola Area</button>
+            <button class="btn-perimetro" onclick="calcolaPerimetro()">Calcola Perimetro</button>
+        </div>
+        
+        <button onclick="calcolaVolume()" style="margin-top: 10px;">Calcola Volume 📦</button>
+        
+        <div class="result" id="result">
+            <div class="result-label" id="resultLabel"></div>
+            <div class="result-value" id="resultValue"></div>
+        </div>
+    </div>
+    
+    <script>
+        function calcolaArea() {
+            const base = parseFloat(document.getElementById('base').value);
+            const altezza = parseFloat(document.getElementById('altezza').value);
+            
+            if (isNaN(base) || isNaN(altezza) || base <= 0 || altezza <= 0) {
+                alert('Inserisci valori validi per base e altezza');
+                return;
+            }
+            
+            const area = calcolaAreaRettangolo(base, altezza);
+            mostraRisultato('Area', area, 'cm²');
+        }
+        
+        function calcolaPerimetro() {
+            const base = parseFloat(document.getElementById('base').value);
+            const altezza = parseFloat(document.getElementById('altezza').value);
+            
+            if (isNaN(base) || isNaN(altezza) || base <= 0 || altezza <= 0) {
+                alert('Inserisci valori validi per base e altezza');
+                return;
+            }
+            
+            const perimetro = calcolaPerimetroRettangolo(base, altezza);
+            mostraRisultato('Perimetro', perimetro, 'cm');
+        }
+        
+        function calcolaVolume() {
+            const base = parseFloat(document.getElementById('base').value);
+            const altezza = parseFloat(document.getElementById('altezza').value);
+            const profondita = parseFloat(document.getElementById('profondita').value);
+            
+            if (isNaN(base) || isNaN(altezza) || isNaN(profondita) || 
+                base <= 0 || altezza <= 0 || profondita <= 0) {
+                alert('Inserisci valori validi per tutte le dimensioni');
+                return;
+            }
+            
+            const volume = calcolaVolumeParallelepipedo(profondita, base, altezza);
+            mostraRisultato('Volume', volume, 'cm³');
+        }
+        
+        /**
+         * Calcola l'area di un rettangolo
+         * @param {number} base - La base
+         * @param {number} altezza - L'altezza
+         * @returns {number} - L'area
+         */
+        function calcolaAreaRettangolo(base, altezza) {
+            return base * altezza;
+        }
+        
+        /**
+         * Calcola il perimetro di un rettangolo
+         * @param {number} base - La base
+         * @param {number} altezza - L'altezza
+         * @returns {number} - Il perimetro
+         */
+        function calcolaPerimetroRettangolo(base, altezza) {
+            return 2 * (base + altezza);
+        }
+        
+        /**
+         * Calcola il volume di un parallelepipedo
+         * @param {number} profondita - La profondità
+         * @param {number} base - La base
+         * @param {number} altezza - L'altezza
+         * @returns {number} - Il volume
+         */
+        function calcolaVolumeParallelepipedo(profondita, base, altezza) {
+            // Utilizza la funzione calcolaArea come parametro
+            const area = calcolaAreaRettangolo(base, altezza);
+            return area * profondita;
+        }
+        
+        function mostraRisultato(tipo, valore, unita) {
+            document.getElementById('resultLabel').textContent = tipo;
+            document.getElementById('resultValue').textContent = valore + ' ' + unita;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

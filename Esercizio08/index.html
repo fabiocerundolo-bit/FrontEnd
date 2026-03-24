@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 08 - Tipo di Dato</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .type-box {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .type-string { background: #d4edda; color: #155724; }
+        .type-number { background: #fff3cd; color: #856404; }
+        .type-object { background: #d1ecf1; color: #0c5460; }
+        .type-array { background: #f8d7da; color: #721c24; }
+        .type-function { background: #e2e3e5; color: #383d41; }
+        .type-boolean { background: #cce5ff; color: #004085; }
+        .type-undefined { background: #f5c6cb; color: #721c24; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Scopri il Tipo di Dato</h1>
+        <div class="input-group">
+            <label for="inputValue">Inserisci un valore (numero, stringa, oggetto JSON, ecc.):</label>
+            <input type="text" id="inputValue" placeholder="Es: 42, 'ciao', [1,2,3], {nome:'Mario'}, true">
+        </div>
+        <button onclick="verificaTipo()">Verifica Tipo</button>
+        <div class="result" id="result">
+            <h3>Risultato:</h3>
+            <div id="tipoOutput"></div>
+            <div id="valoreOutput" style="margin-top: 15px; color: #666; font-style: italic;"></div>
+        </div>
+    </div>
+    <script>
+        function verificaTipo() {
+            const input = document.getElementById('inputValue').value;
+            const tipo = getTipoDato(input);
+            const resultDiv = document.getElementById('result');
+            const tipoOutput = document.getElementById('tipoOutput');
+            const valoreOutput = document.getElementById('valoreOutput');
+            
+            let parsedValue = input;
+            try {
+                if (input.trim().startsWith('[') || input.trim().startsWith('{')) {
+                    parsedValue = JSON.parse(input);
+                } else if (input.toLowerCase() === 'true' || input.toLowerCase() === 'false') {
+                    parsedValue = input.toLowerCase() === 'true';
+                } else if (!isNaN(input) && input.trim() !== '') {
+                    parsedValue = Number(input);
+                }
+            } catch (e) {
+                parsedValue = input;
+            }
+            
+            const tipoReale = getTipoDato(parsedValue);
+            tipoOutput.innerHTML = `<div class="type-box type-${tipoReale}">${tipoReale.toUpperCase()}</div>`;
+            valoreOutput.textContent = `Valore analizzato: ${JSON.stringify(parsedValue)}`;
+            resultDiv.classList.add('show');
+        }
+
+        /**
+         * Restituisce il tipo di dato di un valore
+         * @param {*} valore - Il valore da analizzare
+         * @returns {string} - Il tipo di dato (stringa, numero, oggetto, funzione, undefined, booleano, array)
+         */
+        function getTipoDato(valore) {
+            if (valore === undefined) return 'undefined';
+            if (valore === null) return 'oggetto';
+            if (typeof valore === 'function') return 'funzione';
+            if (Array.isArray(valore)) return 'array';
+            if (typeof valore === 'object') return 'oggetto';
+            if (typeof valore === 'string') return 'stringa';
+            if (typeof valore === 'number') return 'numero';
+            if (typeof valore === 'boolean') return 'booleano';
+            return typeof valore;
+        }
+
+        // Esempi di test
+        console.log('Test 1 (stringa):', getTipoDato("Ciao"));
+        console.log('Test 2 (numero):', getTipoDato(42));
+        console.log('Test 3 (oggetto):', getTipoDato({nome: "Mario"}));
+        console.log('Test 4 (array):', getTipoDato([1, 2, 3]));
+        console.log('Test 5 (funzione):', getTipoDato(function() {}));
+        console.log('Test 6 (undefined):', getTipoDato(undefined));
+        console.log('Test 7 (booleano):', getTipoDato(true));
+        console.log('Test 8 (null):', getTipoDato(null));
+    </script>
+</body>
+</html>

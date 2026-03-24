@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 11 - Stampa Array</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .array-display {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        .current-item {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            background: #e3f2fd;
+            border-radius: 10px;
+        }
+        .progress {
+            margin: 20px 0;
+            color: #666;
+            font-size: 16px;
+        }
+        button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .reset-btn {
+            background: #dc3545;
+            margin-left: 10px;
+        }
+        .reset-btn:hover:not(:disabled) {
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Stampa Elementi Array</h1>
+        <div class="array-display" id="arrayDisplay"></div>
+        <div class="current-item" id="currentItem">Premi il pulsante per iniziare</div>
+        <div class="progress" id="progress"></div>
+        <div>
+            <button id="nextBtn" onclick="stampaProssimoElemento()">Prossimo Elemento ➡️</button>
+            <button class="reset-btn" onclick="resetArray()">🔄 Reset</button>
+        </div>
+    </div>
+    <script>
+        const arrayElementi = ['Mela', 'Banana', 'Arancia', 'Pera', 'Uva', 'Fragola', 'Kiwi'];
+        let indiceCorrente = 0;
+        
+        // Mostra l'array all'inizio
+        document.getElementById('arrayDisplay').textContent = 'Array: [' + arrayElementi.join(', ') + ']';
+        document.getElementById('progress').textContent = `Elementi totali: ${arrayElementi.length}`;
+        
+        /**
+         * Stampa il prossimo elemento dell'array
+         */
+        function stampaProssimoElemento() {
+            if (indiceCorrente < arrayElementi.length) {
+                const elemento = arrayElementi[indiceCorrente];
+                stampaElemento(elemento);
+                document.getElementById('currentItem').textContent = elemento;
+                document.getElementById('progress').textContent = 
+                    `Elemento ${indiceCorrente + 1} di ${arrayElementi.length}`;
+                indiceCorrente++;
+                
+                // Disabilita il pulsante se abbiamo finito
+                if (indiceCorrente >= arrayElementi.length) {
+                    document.getElementById('nextBtn').disabled = true;
+                    document.getElementById('nextBtn').textContent = 'Completato ✓';
+                }
+            }
+        }
+        
+        /**
+         * Stampa un elemento della pagina
+         * @param {*} elemento - L'elemento da stampare
+         */
+        function stampaElemento(elemento) {
+            console.log('Elemento stampato:', elemento);
+        }
+        
+        function resetArray() {
+            indiceCorrente = 0;
+            document.getElementById('currentItem').textContent = 'Premi il pulsante per iniziare';
+            document.getElementById('progress').textContent = `Elementi totali: ${arrayElementi.length}`;
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('nextBtn').textContent = 'Prossimo Elemento ➡️';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 10 - Rotazione Stringa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .string-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 30px 0;
+            letter-spacing: 5px;
+            transition: all 0.3s ease;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .info {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Rotazione Stringa</h1>
+        <div class="input-group">
+            <input type="text" id="stringInput" placeholder="Inserisci una stringa..." value="HELLO">
+        </div>
+        <div class="string-display" id="stringDisplay">HELLO</div>
+        <div class="controls">
+            <button onclick="startRotation()">▶️ Inizia Rotazione</button>
+            <button onclick="stopRotation()">⏹️ Ferma</button>
+        </div>
+        <div class="info">
+            La stringa ruota da sinistra verso destra spostando l'ultima lettera all'inizio
+        </div>
+    </div>
+    <script>
+        let rotationInterval;
+        let currentString = 'HELLO';
+        
+        // Inizializza la visualizzazione
+        document.getElementById('stringInput').addEventListener('input', function() {
+            currentString = this.value || 'HELLO';
+            document.getElementById('stringDisplay').textContent = currentString;
+        });
+        
+        /**
+         * Ruota la stringa da sinistra verso destra
+         * Prende l'ultima lettera e la mette all'inizio
+         * @param {string} str - La stringa da ruotare
+         * @returns {string} - La stringa ruotata
+         */
+        function ruotaStringa(str) {
+            if (str.length <= 1) return str;
+            const ultimaLettera = str.charAt(str.length - 1);
+            const restoStringa = str.substring(0, str.length - 1);
+            return ultimaLettera + restoStringa;
+        }
+        
+        function startRotation() {
+            const input = document.getElementById('stringInput');
+            if (input.value.trim() === '') {
+                alert('Inserisci una stringa prima di iniziare');
+                return;
+            }
+            
+            // Ferma eventuale rotazione precedente
+            stopRotation();
+            
+            // Disabilita l'input durante la rotazione
+            input.disabled = true;
+            
+            // Inizia la rotazione
+            rotationInterval = setInterval(() => {
+                currentString = ruotaStringa(currentString);
+                document.getElementById('stringDisplay').textContent = currentString;
+            }, 500); // Ruota ogni 500ms
+        }
+        
+        function stopRotation() {
+            if (rotationInterval) {
+                clearInterval(rotationInterval);
+                rotationInterval = null;
+            }
+            document.getElementById('stringInput').disabled = false;
+        }
+        
+        // Esempio
+        console.log('Test rotazione:', ruotaStringa("HELLO"));
+    </script>
+</body>
+</html>

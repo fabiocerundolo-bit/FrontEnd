@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 14 - Operazioni Matematiche</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .numbers-display {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .numbers-display p {
+            font-size: 20px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .numbers-display span {
+            font-weight: bold;
+            color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .results {
+            margin-top: 25px;
+            display: none;
+        }
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .operation {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .operation:last-child {
+            margin-bottom: 0;
+        }
+        .operation-name {
+            font-weight: 600;
+            color: #555;
+        }
+        .operation-result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Operazioni Matematiche</h1>
+        
+        <div class="numbers-display">
+            <p>num1 = <span id="num1Display">5</span></p>
+            <p>num2 = <span id="num2Display">9</span></p>
+        </div>
+        
+        <button onclick="calcolaTutto()">Calcola 🚀</button>
+        
+        <div class="results" id="results">
+            <div class="operation">
+                <span class="operation-name">Addizione (+)</span>
+                <span class="operation-result" id="addizione"></span>
+            </div>
+            <div class="operation">
+                <span class="operation-name">Sottrazione (-)</span>
+                <span class="operation-result" id="sottrazione"></span>
+            </div>
+            <div class="operation">
+                <span class="operation-name">Moltiplicazione (×)</span>
+                <span class="operation-result" id="moltiplicazione"></span>
+            </div>
+            <div class="operation">
+                <span class="operation-name">Divisione (÷)</span>
+                <span class="operation-result" id="divisione"></span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const num1 = 5;
+        const num2 = 9;
+        
+        function calcolaTutto() {
+            // Esegue tutte le operazioni
+            const somma = addizione(num1, num2);
+            const differenza = sottrazione(num1, num2);
+            const prodotto = moltiplicazione(num1, num2);
+            const quoziente = divisione(num1, num2);
+            
+            // Stampa in console
+            console.log('Risultati:');
+            console.log('Addizione:', somma);
+            console.log('Sottrazione:', differenza);
+            console.log('Moltiplicazione:', prodotto);
+            console.log('Divisione:', quoziente);
+            
+            // Mostra nel DOM
+            document.getElementById('addizione').textContent = somma;
+            document.getElementById('sottrazione').textContent = differenza;
+            document.getElementById('moltiplicazione').textContent = prodotto;
+            document.getElementById('divisione').textContent = quoziente;
+            document.getElementById('results').classList.add('show');
+        }
+        
+        function addizione(a, b) {
+            return a + b;
+        }
+        
+        function sottrazione(a, b) {
+            return a - b;
+        }
+        
+        function moltiplicazione(a, b) {
+            return a * b;
+        }
+        
+        function divisione(a, b) {
+            if (b === 0) {
+                return 'Impossibile (divisione per 0)';
+            }
+            return (a / b).toFixed(2);
+        }
+    </script>
+</body>
+</html>

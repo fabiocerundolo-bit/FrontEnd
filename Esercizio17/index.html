@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 17 - Vicino a 100</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .target {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .inputs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            flex: 1;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .result.winner {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+        .result.tie {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+        .result-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        .result-text {
+            color: #666;
+            font-size: 16px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Più Vicino a 100</h1>
+        
+        <div class="target">Target: 100</div>
+        
+        <div class="inputs">
+            <div class="input-group">
+                <label for="num1">Numero 1:</label>
+                <input type="number" id="num1" placeholder="Es: 95" value="95">
+            </div>
+            <div class="input-group">
+                <label for="num2">Numero 2:</label>
+                <input type="number" id="num2" placeholder="Es: 105" value="105">
+            </div>
+        </div>
+        
+        <button onclick="trovaPiuVicino()">Trova il Più Vicino 🚀</button>
+        
+        <div class="result" id="result">
+            <div class="result-number" id="resultNumber"></div>
+            <div class="result-text" id="resultText"></div>
+        </div>
+    </div>
+    
+    <script>
+        function trovaPiuVicino() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Inserisci entrambi i numeri');
+                return;
+            }
+            
+            const risultato = trovaValorePiuVicino(num1, num2);
+            const resultDiv = document.getElementById('result');
+            const resultNumber = document.getElementById('resultNumber');
+            const resultText = document.getElementById('resultText');
+            
+            resultDiv.className = 'result show';
+            
+            if (risultato === null) {
+                resultDiv.classList.add('tie');
+                resultNumber.textContent = '⚖️';
+                resultText.textContent = 'I due numeri sono equidistanti da 100!';
+            } else {
+                resultDiv.classList.add('winner');
+                resultNumber.textContent = risultato;
+                const distanza = Math.abs(100 - risultato);
+                resultText.textContent = `Distanza da 100: ${distanza}`;
+            }
+        }
+        
+        /**
+         * Trova il valore più vicino a 100 tra due numeri
+         * @param {number} num1 - Primo numero
+         * @param {number} num2 - Secondo numero
+         * @returns {number|null} - Il numero più vicino o null se sono uguali
+         */
+        function trovaValorePiuVicino(num1, num2) {
+            const distanza1 = Math.abs(100 - num1);
+            const distanza2 = Math.abs(100 - num2);
+            
+            if (distanza1 === distanza2) {
+                return null; // Sono uguali
+            } else if (distanza1 < distanza2) {
+                return num1;
+            } else {
+                return num2;
+            }
+        }
+        
+        // Esempi
+        console.log('Test 1 (95 vs 105):', trovaValorePiuVicino(95, 105));
+        console.log('Test 2 (90 vs 110):', trovaValorePiuVicino(90, 110));
+        console.log('Test 3 (100 vs 100):', trovaValorePiuVicino(100, 100));
+    </script>
+</body>
+</html>

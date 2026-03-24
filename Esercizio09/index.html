@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizio 09 - Parola Più Lunga</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 100px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        .parola-lunga {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 10px;
+        }
+        .lunghezza {
+            color: #666;
+            font-size: 18px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📏 Trova la Parola Più Lunga</h1>
+        <div class="input-group">
+            <label for="frase">Inserisci una frase:</label>
+            <textarea id="frase" placeholder="Es: Mi chiamo Massimiliano e vivo a Roma">Mi chiamo Massimiliano</textarea>
+        </div>
+        <button onclick="trovaParola()">Trova Parola Più Lunga</button>
+        <div class="result" id="result">
+            <h3>La parola più lunga è:</h3>
+            <div class="parola-lunga" id="parolaOutput"></div>
+            <div class="lunghezza" id="lunghezzaOutput"></div>
+        </div>
+    </div>
+    <script>
+        function trovaParola() {
+            const frase = document.getElementById('frase').value;
+            if (!frase.trim()) {
+                alert('Per favore inserisci una frase');
+                return;
+            }
+            
+            const parolaPiuLunga = trovaParolaPiuLunga(frase);
+            const resultDiv = document.getElementById('result');
+            const parolaOutput = document.getElementById('parolaOutput');
+            const lunghezzaOutput = document.getElementById('lunghezzaOutput');
+            
+            parolaOutput.textContent = parolaPiuLunga;
+            lunghezzaOutput.textContent = `Lunghezza: ${parolaPiuLunga.length} caratteri`;
+            resultDiv.classList.add('show');
+        }
+
+        /**
+         * Trova la parola più lunga in una frase
+         * @param {string} frase - La frase da analizzare
+         * @returns {string} - La parola più lunga
+         */
+        function trovaParolaPiuLunga(frase) {
+            // Rimuove la punteggiatura e divide la frase in parole
+            const parole = frase.replace(/[.,!?;:"]/g, '').split(/\s+/);
+            let parolaPiuLunga = '';
+            
+            for (let i = 0; i < parole.length; i++) {
+                if (parole[i].length > parolaPiuLunga.length) {
+                    parolaPiuLunga = parole[i];
+                }
+            }
+            
+            return parolaPiuLunga;
+        }
+
+        // Esempio di test
+        console.log('Test:', trovaParolaPiuLunga("Mi chiamo Massimiliano"));
+    </script>
+</body>
+</html>
