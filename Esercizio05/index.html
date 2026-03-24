@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modulo di contatto">
+    <title>Modulo di Contatto</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="form-section">
+            <header class="form-header">
+                <h1>Compila il form</h1>
+                <p class="subtitle">Inserisci i tuoi dati per contattarci</p>
+            </header>
+            
+            <form action="submit.php" method="post" novalidate>
+                <div class="form-group">
+                    <label for="name">
+                        <span class="label-text">Nome</span>
+                        <span class="required" aria-label="obbligatorio">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Inserisci il tuo nome"
+                        required
+                        autocomplete="name"
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <span class="label-text">Email</span>
+                        <span class="required" aria-label="obbligatorio">*</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="esempio@email.com"
+                        required
+                        autocomplete="email"
+                        aria-required="true"
+                    >
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <span>Invia</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+    
+    <script src="./js/script.js"></script>
+</body>
+</html>
